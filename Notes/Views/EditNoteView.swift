@@ -19,25 +19,23 @@ struct EditNoteView: View {
     var body: some View {
         Form {
             Section() {
-                TextField("\(note.title!)", text: $title)
-                    .onAppear {
-                        title = note.title!
-                    }
-                TextField("\(note.text!)", text: $text)
-                    .onAppear {
-                        text = note.text!
-                    }
-                    .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
-            }
-            Section {
-                HStack {
-                    Spacer()
-                    Button("Done") {
-                        DataController().editNote(note: note, title: title, text: text, context: managedObjContext)
-                        dismiss()
-                    }
-                    Spacer()
+                VStack {
+                    TextField("\(note.title!)", text: $title)
+                        .bold()
+                        .onAppear {
+                            title = note.title!
+                        }
+                    TextField("\(note.text!)", text: $text, axis: .vertical)
+                        .lineLimit(5...25)
+                        .onAppear {
+                            text = note.text!
+                        }
+                        .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
                 }
+            }
+            .onDisappear() {
+                DataController().editNote(note: note, title: title, text: text, context: managedObjContext)
+                dismiss()
             }
         }
     }

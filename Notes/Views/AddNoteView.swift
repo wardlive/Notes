@@ -13,22 +13,25 @@ struct AddNoteView: View {
     
     @State private var title = ""
     @State private var text = ""
-    
+
     var body: some View {
         Form {
             Section() {
-                TextField("Note", text: $title)
-                TextField("Free your mind", text: $text)
-                    .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
-            }
-            Section() {
-                    Button("Done") {
-                        DataController().addNote(title: title, text: text, context: managedObjContext)
-                        dismiss()
+                VStack {
+                    TextField("Note", text: $title)
+                        .bold()
+                    Divider()
+                    TextField("Free your mind", text: $text, axis: .vertical)
+                        .lineLimit(5...25)
+                        .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
                 }
+                .textFieldStyle(.automatic)
+            }
+            .onDisappear() {
+                DataController().addNote(title: title, text: text, context: managedObjContext)
+                dismiss()
             }
         }
-        .background(.ultraThinMaterial)
     }
 }
 
