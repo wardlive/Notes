@@ -14,28 +14,27 @@ struct ContentView: View {
     @State var isPinned = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(alignment: .leading) {
                 List {
                     ForEach(note) { note in
                         NavigationLink(destination: EditNoteView(note: note)) {
-                            HStack {
                                 VStack(alignment: .leading) {
                                     Text(note.title!)
                                         .bold()
                                     Text(note.text!)
-                                        .font(.body)
+                                        .foregroundColor(.secondary)
                                         .lineLimit(2)
                                 }
                                 Spacer()
-                            }
                         }
                     }
                     .onDelete(perform: deleteNote)
                     
+                    // Add pin/unpin action
                     .swipeActions(edge: .leading) {
                         Button {
-                            withAnimation { isPinned.toggle() }
+                            withAnimation(.spring()) { isPinned.toggle() }
                         } label: {
                             if isPinned {
                                 Label("Unpin", systemImage: "pin.slash")
@@ -48,9 +47,10 @@ struct ContentView: View {
                 }
                 .listStyle(.automatic)
             }
+            .background(Color("Background"))
             .navigationTitle("Notes")
             .toolbar {
-                ToolbarItem(placement: .bottomBar) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     HStack {
                         Button {
                             withAnimation(.spring() ) {
@@ -58,11 +58,15 @@ struct ContentView: View {
                             }
                         } label: {
                             Label("Add Note", systemImage: "plus.circle")
-                                .font(.title)
+                                .font(.title2)
                         }
                     }
                 }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    EditButton()
+                }
             }
+            //opening AddNoteView
             .sheet(isPresented: $showingAddView) {
                 AddNoteView()
             }
@@ -75,7 +79,7 @@ struct ContentView: View {
             offsets.map { note[$0] }
                 .forEach(managedObjContext.delete)
             
-            // Saves to our database
+            // Save changes to our database
             DataController().save(context: managedObjContext)
         }
     }
