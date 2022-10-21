@@ -11,6 +11,10 @@
 		A3BD32B1290221FC009699CE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BD32B0290221FC009699CE /* ContentView.swift */; };
 		A3BD32B3290221FC009699CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3BD32B2290221FC009699CE /* Assets.xcassets */; };
 		A3BD32B6290221FC009699CE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3BD32B5290221FC009699CE /* Preview Assets.xcassets */; };
+		A3BD32BE29022249009699CE /* NoteModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3BD32BC29022249009699CE /* NoteModel.xcdatamodeld */; };
+		A3BD32C129022453009699CE /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BD32C029022453009699CE /* DataController.swift */; };
+		A3BD32C5290228AF009699CE /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BD32C4290228AF009699CE /* AddNoteView.swift */; };
+		A3BD32C9290237D1009699CE /* EditNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BD32C8290237D1009699CE /* EditNoteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +23,10 @@
 		A3BD32B0290221FC009699CE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A3BD32B2290221FC009699CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A3BD32B5290221FC009699CE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A3BD32BD29022249009699CE /* NoteModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoteModel.xcdatamodel; sourceTree = "<group>"; };
+		A3BD32C029022453009699CE /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		A3BD32C4290228AF009699CE /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
+		A3BD32C8290237D1009699CE /* EditNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,8 +60,9 @@
 			isa = PBXGroup;
 			children = (
 				A3BD32AE290221FC009699CE /* NotesApp.swift */,
-				A3BD32B0290221FC009699CE /* ContentView.swift */,
+				A3BD32C22902284E009699CE /* Views */,
 				A3BD32B2290221FC009699CE /* Assets.xcassets */,
+				A3BD32BF2902226D009699CE /* DataModel */,
 				A3BD32B4290221FC009699CE /* Preview Content */,
 			);
 			path = Notes;
@@ -65,6 +74,25 @@
 				A3BD32B5290221FC009699CE /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A3BD32BF2902226D009699CE /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				A3BD32BC29022249009699CE /* NoteModel.xcdatamodeld */,
+				A3BD32C029022453009699CE /* DataController.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		A3BD32C22902284E009699CE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A3BD32B0290221FC009699CE /* ContentView.swift */,
+				A3BD32C4290228AF009699CE /* AddNoteView.swift */,
+				A3BD32C8290237D1009699CE /* EditNoteView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +166,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3BD32B1290221FC009699CE /* ContentView.swift in Sources */,
+				A3BD32C129022453009699CE /* DataController.swift in Sources */,
 				A3BD32AF290221FC009699CE /* NotesApp.swift in Sources */,
+				A3BD32BE29022249009699CE /* NoteModel.xcdatamodeld in Sources */,
+				A3BD32C5290228AF009699CE /* AddNoteView.swift in Sources */,
+				A3BD32C9290237D1009699CE /* EditNoteView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +371,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A3BD32BC29022249009699CE /* NoteModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A3BD32BD29022249009699CE /* NoteModel.xcdatamodel */,
+			);
+			currentVersion = A3BD32BD29022249009699CE /* NoteModel.xcdatamodel */;
+			path = NoteModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A3BD32A3290221FC009699CE /* Project object */;
 }
