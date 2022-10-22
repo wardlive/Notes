@@ -52,6 +52,8 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     HStack {
+                        Text("\(note.count) notes")
+                        
                         Button {
                             withAnimation(.spring() ) {
                                 showingAddView.toggle()
@@ -62,7 +64,7 @@ struct ContentView: View {
                         }
                     }
                 }
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
             }

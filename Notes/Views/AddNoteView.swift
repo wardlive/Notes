@@ -20,7 +20,6 @@ struct AddNoteView: View {
                 VStack {
                     TextField("Note", text: $title)
                         .bold()
-                    Divider()
                     TextField("Free your mind", text: $text, axis: .vertical)
                         .lineLimit(5...25)
                         .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
