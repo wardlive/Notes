@@ -19,16 +19,16 @@ struct ContentView: View {
                 List {
                     ForEach(note) { note in
                         NavigationLink(destination: EditNoteView(note: note)) {
-                                VStack(alignment: .leading) {
-                                    Text(note.title!)
-                                        .bold()
-                                    Text(note.text!)
-                                        .foregroundColor(.secondary)
-                                        .lineLimit(2)
-                                }
-                                Spacer()
+                            VStack(alignment: .leading) {
+                                Text(note.title!)
+                                    .bold()
+                                Text(note.text!)
+                                    .foregroundColor(.secondary)
+                                    .lineLimit(2)
+                            }
                         }
                     }
+                    
                     .onDelete(perform: deleteNote)
                     
                     // Add pin/unpin action
@@ -46,33 +46,37 @@ struct ContentView: View {
                     }
                 }
                 .listStyle(.automatic)
-            }
-            .background(Color("Background"))
-            .navigationTitle("Notes")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    HStack {
-                        Text("\(note.count) notes")
-                        
-                        Button {
-                            withAnimation(.spring() ) {
-                                showingAddView.toggle()
+                //toolbar after list!
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        EditButton()
+                    }
+                    
+                    ToolbarItem(placement: .bottomBar) {
+                        HStack {
+                            Text("\(note.count) notes")
+                                .foregroundColor(.secondary)
+                            Spacer()
+                            Button {
+                                withAnimation(.spring() ) {
+                                    showingAddView.toggle()
+                                }
+                            } label: {
+                                Label("Add Note", systemImage: "plus.circle")
+                                    .font(.title)
                             }
-                        } label: {
-                            Label("Add Note", systemImage: "plus.circle")
-                                .font(.title2)
                         }
                     }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
             }
+            .navigationTitle("Notes")
+            
             //opening AddNoteView
             .sheet(isPresented: $showingAddView) {
                 AddNoteView()
             }
         }
+        
     }
     
     // Deletes Note at the current offset
