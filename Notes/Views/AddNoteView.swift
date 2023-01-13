@@ -34,7 +34,6 @@ struct AddNoteView: View {
     }
 }
 
-
 struct AddNoteView_Previews: PreviewProvider {
     static var previews: some View {
         AddNoteView()

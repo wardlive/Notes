@@ -9,8 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjContext
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var note: FetchedResults<Note>
-    @State private var showingAddView = false
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)], animation: .spring())
+    var note: FetchedResults<Note>
+    @State var showingAddView = false
     @State var isPinned = false
     
     var body: some View {
@@ -22,13 +23,15 @@ struct ContentView: View {
                             VStack(alignment: .leading) {
                                 Text(note.title!)
                                     .bold()
-                                Text(note.text!)
+//                                Text(note.text!)
+//                                    .foregroundColor(.secondary)
+//                                    .lineLimit(2)
+                                Text(note.date!, formatter: itemFormatter)
+                                    .font(.footnote)
                                     .foregroundColor(.secondary)
-                                    .lineLimit(2)
                             }
                         }
                     }
-                    
                     .onDelete(perform: deleteNote)
                     
                     // Add pin/unpin action
@@ -46,50 +49,56 @@ struct ContentView: View {
                     }
                 }
                 .listStyle(.automatic)
+                .navigationTitle("Notes")
+                
                 //toolbar after list!
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         EditButton()
                     }
-                    
+                    ToolbarItem {
+                        Button {
+                            withAnimation(.spring() ) {
+                                showingAddView.toggle()
+                            }
+                        } label: {
+                            Label("Add Note", systemImage: "plus")
+                        }
+                    }
                     ToolbarItem(placement: .bottomBar) {
                         HStack {
                             Text("\(note.count) notes")
                                 .foregroundColor(.secondary)
                             Spacer()
-                            Button {
-                                withAnimation(.spring() ) {
-                                    showingAddView.toggle()
-                                }
-                            } label: {
-                                Label("Add Note", systemImage: "plus.circle")
-                                    .font(.title)
-                            }
                         }
                     }
                 }
             }
-            .navigationTitle("Notes")
             
             //opening AddNoteView
             .sheet(isPresented: $showingAddView) {
                 AddNoteView()
             }
         }
-        
     }
     
     // Deletes Note at the current offset
     private func deleteNote(offsets: IndexSet) {
         withAnimation(.spring()) {
-            offsets.map { note[$0] }
-                .forEach(managedObjContext.delete)
+            offsets.map { note[$0] }.forEach(managedObjContext.delete)
             
             // Save changes to our database
             DataController().save(context: managedObjContext)
         }
     }
 }
+
+private let itemFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .short
+    formatter.timeStyle = .medium
+    return formatter
+}()
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
