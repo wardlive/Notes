@@ -43,6 +43,6 @@ struct EditNoteView: View {
 
 //struct EditNoteView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        EditNoteView()
+//        EditNoteView(note: <Note>)
 //    }
 //}
